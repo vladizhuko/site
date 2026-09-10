@@ -1,0 +1,488 @@
+/* ---------------------------------------------------------
+   Vladimir Zhukovskiy — portfolio
+   Swiss neutral: pure white, hairline grid, tight sans-serif.
+--------------------------------------------------------- */
+
+:root {
+  --bg: #ffffff;
+  --fg: #111111;
+  --muted: #767676;
+  --muted-2: #a3a3a3;
+  --line: #e3e3e3;
+  --max-width: 1120px;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: "Helvetica Neue", Helvetica, Arial, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  line-height: 1.5;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img { max-width: 100%; display: block; }
+
+/* ---------- Header ---------- */
+.site-header {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 32px 24px 20px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 6px 24px;
+  border-bottom: 1px solid var(--line);
+}
+
+.site-brand {
+  display: flex;
+  align-items: baseline;
+  gap: 8px 16px;
+  flex-wrap: wrap;
+  margin-left: auto;
+}
+
+.site-title {
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+}
+
+.site-subtitle {
+  font-size: 11px;
+  color: var(--muted-2);
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+}
+
+.site-nav {
+  position: relative;
+  display: flex;
+  gap: 12px 22px;
+  flex-wrap: wrap;
+}
+
+.site-nav a {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+  padding-bottom: 4px;
+}
+
+.site-nav a:hover,
+.site-nav a.active {
+  color: var(--fg);
+}
+
+.nav-indicator {
+  position: absolute;
+  left: 0;
+  bottom: -1px;
+  height: 1px;
+  background: var(--fg);
+  opacity: 0;
+  transition: transform .25s ease, width .25s ease, opacity .2s ease;
+  pointer-events: none;
+}
+
+/* ---------- Main ---------- */
+main {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 24px 96px;
+}
+
+/* ---------- Video wall (text-free, homepage) ---------- */
+.video-wall {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  background: var(--line);
+  border: 1px solid var(--line);
+  margin: 40px 0 24px;
+}
+
+.video-wall .video-card {
+  background: var(--bg);
+  opacity: 0;
+  transform: translateY(-14px);
+  animation: video-fade-in .5s ease forwards;
+  animation-delay: var(--fade-delay, 0s);
+}
+
+@keyframes video-fade-in {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .video-wall .video-card {
+    opacity: 1;
+    transform: none;
+    animation: none;
+  }
+}
+
+.video-wall .video-placeholder {
+  aspect-ratio: 1 / 1;
+  background: #fafafa;
+}
+
+.video-wall .video-card:hover .video-placeholder {
+  background: #f1f1f1;
+}
+
+.video-wall .video-card:hover .play-icon {
+  opacity: 1;
+}
+
+@media (max-width: 900px) {
+  .video-wall { grid-template-columns: repeat(3, 1fr); }
+}
+@media (max-width: 600px) {
+  .video-wall { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* ---------- Work grid (hairline) ---------- */
+.work-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1px;
+  background: var(--line);
+  border: 1px solid var(--line);
+}
+
+.work-tile {
+  display: block;
+  background: var(--bg);
+}
+
+.work-tile-media {
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  background: #fafafa;
+}
+
+.work-tile-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(100%) contrast(1.02);
+  transition: transform .5s ease, filter .5s ease;
+}
+
+.work-tile:hover .work-tile-media img {
+  transform: scale(1.03);
+  filter: grayscale(0%) contrast(1);
+}
+
+.work-tile-caption {
+  padding: 16px 20px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  border-top: 1px solid var(--line);
+}
+
+.work-tile-title {
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: -0.005em;
+}
+
+.work-tile-blurb {
+  font-size: 13px;
+  color: var(--muted);
+}
+
+/* ---------- Placeholder tiles ---------- */
+.placeholder-tile {
+  width: 100%;
+  height: 100%;
+  min-height: 140px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 12px;
+  background: repeating-linear-gradient(
+    135deg, #fafafa, #fafafa 10px, #f1f1f1 10px, #f1f1f1 20px
+  );
+  color: var(--muted);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+/* ---------- Project page ---------- */
+.back-link {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+  margin-bottom: 32px;
+}
+.back-link:hover { color: var(--fg); }
+
+.project h1 {
+  font-size: clamp(24px, 3.6vw, 38px);
+  font-weight: 700;
+  margin: 0 0 28px;
+  letter-spacing: -0.015em;
+}
+
+.project-copy {
+  max-width: 680px;
+  margin-bottom: 48px;
+}
+
+.project-copy p {
+  color: #333;
+  font-size: 15px;
+  margin: 0 0 16px;
+}
+
+.section-label {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--muted);
+  border-top: 1px solid var(--line);
+  padding-top: 32px;
+  margin: 0 0 1px;
+}
+
+/* ---------- Video grid (hairline) ---------- */
+.video-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 1px;
+  background: var(--line);
+  border: 1px solid var(--line);
+  margin: 20px 0 16px;
+}
+
+.video-card {
+  cursor: pointer;
+  background: var(--bg);
+}
+
+.video-placeholder {
+  aspect-ratio: 16 / 9;
+  background: #fafafa;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  transition: background .2s ease;
+}
+
+.video-card:hover .video-placeholder {
+  background: #f1f1f1;
+}
+
+.play-icon {
+  font-size: 20px;
+  color: var(--fg);
+  opacity: 0.8;
+  transform: translateX(2px);
+}
+
+.video-card-title {
+  margin: 0;
+  padding: 12px 16px 16px;
+  font-size: 13px;
+  color: #333;
+  border-top: 1px solid var(--line);
+}
+
+.video-embed {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: #000;
+}
+.video-embed iframe,
+.video-embed video {
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+/* ---------- Image grid (hairline) ---------- */
+.image-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1px;
+  background: var(--line);
+  border: 1px solid var(--line);
+}
+
+.image-tile {
+  background: #fafafa;
+  overflow: hidden;
+}
+
+.image-tile img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ---------- Profile ---------- */
+.profile-page {
+  padding-top: 56px;
+  max-width: 760px;
+}
+
+.profile-page h1 {
+  font-size: clamp(24px, 3.6vw, 34px);
+  font-weight: 700;
+  margin: 0 0 40px;
+  letter-spacing: -0.015em;
+}
+
+.profile-block {
+  margin-bottom: 40px;
+}
+
+.profile-intro {
+  max-width: 640px;
+}
+
+.profile-lede {
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  margin: 0 0 20px;
+}
+
+.profile-intro p {
+  font-size: 15px;
+  color: #333;
+  margin: 0 0 16px;
+}
+
+.profile-intro p:last-child {
+  margin-bottom: 0;
+}
+
+.profile-block .section-label {
+  margin-bottom: 24px;
+}
+
+.profile-resume-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 22px;
+  border: 1px solid var(--fg);
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  transition: background .15s ease, color .15s ease;
+}
+
+.profile-resume-link:hover {
+  background: var(--fg);
+  color: var(--bg);
+}
+
+.profile-resume-link .arrow {
+  transition: transform .15s ease;
+}
+
+.profile-resume-link:hover .arrow {
+  transform: translateX(3px);
+}
+
+.profile-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--line);
+  border: 1px solid var(--line);
+}
+
+.profile-stat {
+  background: var(--bg);
+  padding: 20px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.profile-stat-num {
+  font-size: 26px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.profile-stat-label {
+  font-size: 12.5px;
+  color: var(--muted);
+  line-height: 1.4;
+}
+
+.profile-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.profile-tags span {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 7px 12px;
+  border: 1px solid var(--line);
+  color: #333;
+}
+
+@media (max-width: 600px) {
+  .profile-stats { grid-template-columns: 1fr; }
+}
+
+/* ---------- Footer ---------- */
+.site-footer {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 28px 24px 64px;
+  border-top: 1px solid var(--line);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: center;
+}
+
+.footer-note {
+  font-size: 11px;
+  color: var(--muted-2);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 720px) {
+  .work-grid { grid-template-columns: 1fr; }
+  .site-brand { margin-left: 0; }
+}
