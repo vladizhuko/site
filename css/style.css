@@ -140,12 +140,19 @@ main {
 .video-wall .video-placeholder {
   aspect-ratio: 16 / 9;
   background-color: #eee;
-  background-size: cover;
-  background-position: center;
-  transition: filter .2s ease;
+  overflow: hidden;
 }
 
-.video-wall .video-card:hover .video-placeholder {
+.video-wall .video-thumb {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  transition: transform .4s ease, filter .3s ease;
+}
+
+.video-wall .video-card:hover .video-thumb {
+  transform: scale(1.06);
   filter: brightness(0.85);
 }
 
